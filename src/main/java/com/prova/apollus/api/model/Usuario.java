@@ -11,6 +11,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -62,7 +64,8 @@ public class Usuario {
 	}
 
 	public void setSenha(String senha) {
-		this.senha = senha;
+		BCryptPasswordEncoder pass = new BCryptPasswordEncoder();
+		this.senha = pass.encode(senha);
 	}
 
 	public Perfil getPerfil() {
